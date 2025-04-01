@@ -25,7 +25,7 @@ jobs:
         run: |
           python -m venv C:\environments\appium_env
           C:\environments\appium_env\Scripts\activate
-          pip install -r GB_android/requirements.txt
+          pip install -r requirements.txt
 
       - name: Start Appium Server
         run: |
