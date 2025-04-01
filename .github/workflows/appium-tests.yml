@@ -34,8 +34,8 @@ jobs:
 
 
       - name: Run Tests
-        env:
-          APPIUM_SERVER: "http://localhost:4723/wd/hub"
+        shell: cmd
         run: |
-          C:\environments\appium_env\Scripts\activate
+          call C:\environments\appium_env\Scripts\activate
           pytest tests/
+
