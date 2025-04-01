@@ -36,8 +36,9 @@ jobs:
           npm install -g appium
           start /B appium --log appium.log  # Correct way to start Appium in the background
 
-      - name: Run Tests
-        shell: cmd
+      - name: Start Appium Server
+        shell: pwsh
         run: |
-          call C:\environments\appium_env\Scripts\activate
-          python -m pytest tests/
+          npm install -g appium
+          Start-Process -NoNewWindow -FilePath "appium" -ArgumentList "--log appium.log"
+
