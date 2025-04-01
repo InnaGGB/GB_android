@@ -22,8 +22,10 @@ jobs:
           python-version: "3.10"
 
       - name: Install Dependencies
+        shell: cmd
         run: |
-          call C:\environments\appium_env\Scripts\activate
+          python -m venv C:\environments\appium_env
+          C:\environments\appium_env\Scripts\activate
           pip install -r requirements.txt
 
 
@@ -37,7 +39,7 @@ jobs:
       - name: Run Tests
         shell: cmd
         run: |
-          call C:\environments\appium_env\Scripts\activate
+          C:\environments\appium_env\Scripts\activate
           python -m pytest tests/
 
 
