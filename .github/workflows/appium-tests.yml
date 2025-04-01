@@ -37,5 +37,5 @@ jobs:
         shell: cmd
         run: |
           call C:\environments\appium_env\Scripts\activate
-          pytest tests/
+          python -m pytest tests/
 
