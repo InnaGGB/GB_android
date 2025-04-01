@@ -30,8 +30,8 @@ jobs:
       - name: Start Appium Server
         run: |
           npm install -g appium
-          Start-Process -NoNewWindow -FilePath "appium" -ArgumentList "--log appium.log"
-        shell: powershell
+          Start-Job -ScriptBlock { appium --log appium.log }
+
 
       - name: Run Tests
         env:
