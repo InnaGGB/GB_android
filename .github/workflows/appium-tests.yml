@@ -10,8 +10,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    
+    runs-on: windows-latest  # Use Windows instead of Ubuntu
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -23,19 +23,19 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          python -m venv C:\environments\appium_env
+          C:\environments\appium_env\Scripts\activate
           pip install -r requirements.txt
 
       - name: Start Appium Server
         run: |
           npm install -g appium
-          appium --log appium.log &
+          Start-Process -NoNewWindow -FilePath "appium" -ArgumentList "--log appium.log"
+        shell: powershell
 
       - name: Run Tests
         env:
           APPIUM_SERVER: "http://localhost:4723/wd/hub"
         run: |
-          source venv/bin/activate
+          C:\environments\appium_env\Scripts\activate
           pytest tests/
- 
