@@ -22,12 +22,14 @@ jobs:
           python-version: "3.10"
 
       - name: Create Virtual Environment and Install Dependencies
+        shell: pwsh  # Ensures the correct shell is used (PowerShell)
         run: |
           python -m venv C:\environments\appium_env
-          call C:\environments\appium_env\Scripts\activate
+          & C:\environments\appium_env\Scripts\Activate.ps1
           pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest  # Ensure pytest is installed
+
 
       - name: Start Appium Server
         run: |
