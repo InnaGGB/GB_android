@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest  # Ensure it's Windows
+    runs-on: windows-latest  # Use Windows instead of Ubuntu
 
     steps:
       - name: Checkout Repository
@@ -21,24 +21,23 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Create Virtual Environment and Install Dependencies
-        shell: pwsh  # Ensures the correct shell is used (PowerShell)
+      - name: Install Dependencies
         run: |
-          python -m venv C:\environments\appium_env
-          & C:\environments\appium_env\Scripts\Activate.ps1
-          pip install --upgrade pip
+          call C:\environments\appium_env\Scripts\activate
           pip install -r requirements.txt
-          pip install pytest  # Ensure pytest is installed
 
 
       - name: Start Appium Server
+        shell: cmd
         run: |
           npm install -g appium
-          start /B appium --log appium.log  # Correct way to start Appium in the background
+          Start-Job -ScriptBlock { appium --log appium.log }
 
-      - name: Start Appium Server
-        shell: pwsh
+
+      - name: Run Tests
+        shell: cmd
         run: |
-          npm install -g appium
-          Start-Process -NoNewWindow -FilePath "appium" -ArgumentList "--log appium.log"
+          call C:\environments\appium_env\Scripts\activate
+          python -m pytest tests/
+
 
